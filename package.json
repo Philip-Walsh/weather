@@ -1,0 +1,102 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/src/server.js",
+    "start:dev": "nodemon src/server.ts",
+    "test:integration": "jest --testMatch='**/integration/**/*.test.ts'",
+    "test:unit": "jest --testMatch='**/unit/**/*.test.ts'",
+    "test": "test:unit && test:integration",
+    "lint": "prettier **/*.ts --check && eslint **/*.ts",
+    "lint:fix": "prettier . --write && eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Philip-Walsh/weather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Philip-Walsh/weather/issues"
+  },
+  "homepage": "https://github.com/Philip-Walsh/weather#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.19.2",
+    "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.11",
+    "@types/mongodb": "^4.0.7",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3",
+    "prettier": "3.2.4",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "nyc": {
+    "report-dir": "coverage",
+    "reporter": [
+      "lcov"
+    ],
+    "temp-directory": "coverage",
+    "clean": false
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/unit/api/api.test"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/test"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupFilesAfterEnv.test.ts"
+    ],
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1",
+      "tests/(.*)": "<rootDir>/test/$1"
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
+    "testTimeout": 10000,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "!src/**/*.test.{ts,tsx,js,jsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "\\.test\\.ts$",
+      "\\.spec\\.ts$",
+      "/__tests__/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "collectCoverage": false,
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "coverageDirectory": "<rootDir>/coverage"
+  }
+}
