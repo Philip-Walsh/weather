@@ -1,6 +1,6 @@
 import express from 'express';
 import api from './api';
-const cors = require('cors');
+import cors from 'cors';
 
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -8,7 +8,7 @@ const server = express();
 server.use(cors());
 
 server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port: ${PORT}`);
   });
 
 server.use('/', api);
