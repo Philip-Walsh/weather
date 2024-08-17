@@ -19,7 +19,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {weather && weather.current ? (
-          <div>
+          <section>
+            <h1>Hows it look out there?</h1>
             <h1>{weather.location.name} {weather.location.country}</h1>
             <p>{weather.current.condition.text}</p>
             <p>Temperature: {weather.current.temp_c}°C</p>
@@ -27,7 +28,7 @@ function App() {
             <p>Wind: {weather.current.wind_kph} km/h, {weather.current.wind_dir}</p>
 
             {/* <code>{JSON.stringify(weather)}</code> */}
-          </div>
+          </section>
         ) : (
           <code>{JSON.stringify(weather)}</code>
         )}
