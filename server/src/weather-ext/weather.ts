@@ -9,7 +9,7 @@ export class Weather {
         }
      }
 
-    async getCurrentWeather(location: string) {
+    async getCurrent(location: string) {
         const response = await fetch(`${this.API_URL}/current.json?key=${this.apiKey}&q=${location}`);
         if (response.ok) {
             return response.json();
@@ -19,7 +19,7 @@ export class Weather {
     }
 
     async getForecast(location: string) {
-        const response = await fetch(`${process.env.WEATHER_API_URL}/forecast.json?key=${this.apiKey}&q=${location}`);
+        const response = await fetch(`${this.API_URL}/forecast.json?key=${this.apiKey}&q=${location}`);
         if (response.ok) {
             return response.json();
         } else {
