@@ -1,8 +1,4 @@
-Here’s a polished version of your README:
-
----
-
-# Weather App
+# Weather App ☀️
 
 ## Overview
 
