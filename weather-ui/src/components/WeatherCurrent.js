@@ -19,7 +19,7 @@ function WeatherCurrent({ weather }) {
     }
     const { current, location } = weather;
 
-    const currentConditionTxt = conditions[current.condition.text] ?? '❓';
+    const currentConditionTxt = conditions[current.condition.text.toLowerCase()] ?? '❓';
 
     return (
         <article id="weather-current">
@@ -33,6 +33,7 @@ function WeatherCurrent({ weather }) {
                     aria-label={currentConditionTxt}>
                     {currentConditionTxt}
                 </span>
+                <p>{current.condition.text}</p>
             </section>
             <section id="weather">
                 <p>Temperature: {current.temp_c}°C</p>

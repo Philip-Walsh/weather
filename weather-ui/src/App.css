@@ -2,17 +2,13 @@
 
 :root {
   --text-color-primary: #000;
-  --text-color-secondary: #6f17c4;
-  --card-color: #E4DCCF;
-  --margin-color: #212427;
-  --brand-color: #6cc417;
   --text-brand-color: #F6F1F1;
   --elem-height: 3em;
 
   /*  60-30-10 Rule */
-  --bg-primary: 33 33 33;
-  --bg-secondary: 50 50 50;
-  --bg-accent: 13 115 119;
+  --bg-primary: 230, 255, 148;
+  --bg-secondary: 157, 222, 139;
+  --bg-accent: 0, 103, 105;
   --bg-highlight: #14FFEC;
 }
 
@@ -21,6 +17,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -34,6 +31,7 @@ code {
 html {
   font-size: 16px;
   font-family: "JetBrains Mono", monospace;
+  color: var(--text-color-primary);
 
 }
 
@@ -61,6 +59,7 @@ header {
   grid-area: header;
   max-height: 2em;
 }
+
 header img {
   max-height: 2em;
 }
@@ -87,14 +86,15 @@ nav {
 main {
   grid-area: main;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
   overflow: hidden;
   animation: gradient 3s ease infinite;
-  background: rgba(var(--bg-accent) / 70%);
+  /* background: rgba(var(--bg-secondary) / 70%); */
+  background: #006769;
 }
 
 
@@ -110,20 +110,6 @@ button {
 button:hover {
   filter: drop-shadow(16px 16px 20px var(--bg-highlight)) brightness(1.1);
   transition: all 0.3s ease-in-out;
-}
-
-svg {
-  height: 3em;
-}
-
-header svg {
-  height: 1.5em;
-  padding-right: 1em;
-  padding-top: .1em;
-}
-
-svg path {
-  fill: var(--text-brand-color);
 }
 
 span {
@@ -151,11 +137,13 @@ span {
   grid-template-areas: 'location location'
     'conditions other';
   grid-template-columns: 1fr 1fr;
+  background: rgb(var(--bg-primary));
 }
 
-#weather-current * {
+/* #weather-current * {
   border: 2px solid var(--bg-highlight);
-}
+} */
+
 #location {
   grid-area: location;
   padding: 1em;
@@ -173,10 +161,16 @@ span {
   align-items: center;
   gap: 1em;
 }
+
 #conditions {
   grid-area: conditions;
   padding: 1em;
 }
+
 #conditions .emoji {
   font-size: 10em;
+}
+
+.map {
+  max-height: 30em;
 }
