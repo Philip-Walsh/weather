@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Color+Emoji&family=Oswald:wght@200..700&display=swap');
 
 :root {
   --text-color-primary: #000;
@@ -15,6 +16,11 @@
   --bg-highlight: #14FFEC;
 }
 
+.emoji {
+  font-family: "Noto Color Emoji", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;
@@ -138,4 +144,39 @@ span {
   left: 50%;
   transform: translateX(-50%);
   opacity: 1;
+}
+
+#weather-current {
+  display: grid;
+  grid-template-areas: 'location location'
+    'conditions other';
+  grid-template-columns: 1fr 1fr;
+}
+
+#weather-current * {
+  border: 2px solid var(--bg-highlight);
+}
+#location {
+  grid-area: location;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;;
+}
+
+#weather {
+  grid-area: other;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+#conditions {
+  grid-area: conditions;
+  padding: 1em;
+}
+#conditions .emoji {
+  font-size: 10em;
 }
