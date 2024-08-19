@@ -4,13 +4,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import WeatherCurrent from './components/WeatherCurrent';
 import ireland from './ireland.svg';
+import WeatherForecast from './components/WeatherForecast';
 
 function App() {
 
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/weather/forecast/galway')
+    axios.get('http://localhost:3000/weather/forecast/galway/7')
       .then(response => setWeather(response.data))
       .catch(error => console.error(error));
 
@@ -23,11 +24,12 @@ function App() {
       </header>
       <main>
         <WeatherCurrent weather={weather} />
-        <img src={ireland} className="map" alt="ireland" />
+        <WeatherForecast weather={weather} />
+        {/* <img src={ireland} className="map" alt="ireland" /> */}
       </main>
       <footer></footer>
     </>
-  );  
+  );
 }
 
 export default App;

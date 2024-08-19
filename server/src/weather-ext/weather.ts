@@ -22,8 +22,14 @@ export class Weather {
      * @return {Promise<object>} - a Promise that resolves to the weather data
      * @throws {WeatherApiError} - if there is an error fetching the weather data
      */
-    async fetchData(endpoint: string, location: string) {
-        const response = await fetch(`https://api.weatherapi.com/v1/${endpoint}.json?key=${this.apiKey}&q=${location}`);
+    async fetchData(endpoint: string, location: string, days: unknown) {
+        let additionalParameters = ''
+        if (days) {
+            additionalParameters = `&days=${days}`
+        }
+        const url = `https://api.weatherapi.com/v1/${endpoint}.json?key=${this.apiKey}&q=${location}${additionalParameters}`
+        console.log(url);
+        const response = await fetch(url);
 
         if (response.ok) {
             return response.json();

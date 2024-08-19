@@ -5,6 +5,7 @@ const conditions = {
     'overcast': '🌥️',
     'mist': '🌫️',
     'patchy rain possible': '🌦️',
+    'patchy rain nearby': '🌦️',
     'patchy snow possible': '🌨️',
     'patchy sleet possible': '🌨️',
     'patchy freezing drizzle possible': '❄️',
