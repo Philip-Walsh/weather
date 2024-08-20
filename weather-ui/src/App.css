@@ -144,9 +144,9 @@ span {
   background: rgb(var(--bg-primary));
 }
 
-main>* {
+/* main>* {
   border: 2px solid var(--bg-highlight);
-}
+} */
 
 #location {
   grid-area: location;
@@ -185,9 +185,6 @@ main>* {
 }
 
 #weather-forecast {
-  min-width: 60em;
-  max-width: 60em;
-  overflow-x: scroll;
 }
 
 #weather-current {
@@ -196,11 +193,19 @@ main>* {
 }
 
 #forecast-list ul {
+  min-width: 60em;
+  max-width: 60em;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
   list-style-type: none;
   display: flex;
   /* flex-direction: column; */
   gap: 1em;
   padding: 1em;
+}
+#forecast-list ul li {
+  width:20em;
+  scroll-snap-align: center;
 }
 /* Hacky exclude same day */
 #forecast-list ul li:first-of-type {

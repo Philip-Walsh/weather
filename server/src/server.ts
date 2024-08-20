@@ -1,7 +1,11 @@
 import express from 'express';
 import api from './api';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+
+
+dotenv.config();
 
 const PORT = Number(process.env.PORT) || 3000;
 const server = express();

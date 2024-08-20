@@ -21,6 +21,7 @@ function WeatherForecast({ weather }) {
     return (
         <article id="weather-forecast">
             <section id="forecast-list">
+                <h1>Weekly Forecast</h1>
                 <ul>
                     {weather.forecast.forecastday.map(day => (
                         <li key={day.date}>
