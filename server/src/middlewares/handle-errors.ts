@@ -12,7 +12,7 @@ export function errorHandler(err: Error, req: Request, res: Response<ErrorRespon
   } else {
     res.status(500);
     //  TODO: log error and remove stack trace in PROD 💥
-    response.stack = err.stack;
+    response.stack = err.stack?.split('\n');
     message = `${err.name}: ${message}`;
   }
   response.message = message;
