@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { ensureError } from "../utils";
 
 
 export function makeDb(uri: string, dbName: string) {
@@ -40,11 +41,11 @@ export function makeDb(uri: string, dbName: string) {
         async function deleteOne(collectionName: string, query: object) {
             return await _runQuery(collectionName, collection => collection.deleteOne(query));
         }
-        async function updateOne(collectionName: string, query: object) {
-            return await _runQuery(collectionName, collection => collection.updateOne(query));
+        async function updateOne(collectionName: string, query: object, update: object) {
+            return await _runQuery(collectionName, collection => collection.updateOne(query, update));
         }
-        async function updateMany(collectionName: string, query: object) {
-            return await _runQuery(collectionName, collection => collection.updateMany(query));
+        async function updateMany(collectionName: string, query: object, update: object) {
+            return await _runQuery(collectionName, collection => collection.updateMany(query, update));
         }
         async function insertMany(collectionName: string, query: object) {
             return await _runQuery(collectionName, collection => collection.insertMany(query));
@@ -60,7 +61,15 @@ export function makeDb(uri: string, dbName: string) {
         }
         async function dropCollection(collectionName: string) {
             const db = await _connect();
-            await db.dropCollection(collectionName);
+            try {
+                await db.dropCollection(collectionName);
+            } catch (err: unknown) {
+                const error = ensureError(err);
+                console.log(error.message)
+                if (error.message !== 'ns not found') {
+                    throw error;
+                }
+            }
         }
 
         return {

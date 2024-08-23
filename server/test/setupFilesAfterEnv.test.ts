@@ -1,10 +1,11 @@
-import path from 'path';
+import { makeDb } from 'src/data/db';
 
-export default async function setupFilesAfterEnv() {
-    // The following line is required for jest to find the setupFilesAfterEnv.ts file.
-    require.resolve(path.join(process.cwd(), 'test/setupFilesAfterEnv.test.ts'));
+async function setupFilesAfterEnv() {
+    const COLLECTION = 'test-collection';
+    await makeDb('mongodb://localhost:27017', 'test-db')().dropCollection(COLLECTION);
 
-    console.log('Finished');
+    console.log('Finished Tests 🏁');
 
 }
 
+setupFilesAfterEnv();

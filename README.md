@@ -56,3 +56,44 @@ To get started with the project:
 ## Contribution
 
 Contributions are welcome! If you have suggestions for improvements or want to add features, feel free to submit a pull request or open an issue.
+
+```txt
+.
+├── api
+│   ├── index.ts
+│   └── weather.ts
+├── data
+│   ├── db.ts
+│   └── index.ts
+├── server.ts
+├── utils
+│   ├── ensure-error.ts
+│   └── index.ts
+└── weather-ext
+    ├── index.ts
+    └── weather.ts
+
+move to ->
+.
+├── api
+│   ├── index.ts
+│   └── weather.ts
+├── data
+│   ├── db.ts
+│   └── index.ts
+├── domain
+│   ├── entities
+│   │   └── weather.ts
+│   └── use-cases
+│       └── fetch-weather.ts
+├── frameworks
+│   └── server.ts
+├── utils
+│   ├── ensure-error.ts
+│   └── index.ts
+└── adapters
+    ├── controllers
+    │   └── weather-controller.ts
+    └── gateways
+        └── weather-gateway.ts
+```

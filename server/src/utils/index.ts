@@ -1,0 +1,1 @@
+export { ensureError } from "./ensure-error";

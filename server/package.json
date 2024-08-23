@@ -7,8 +7,9 @@
     "build": "npx tsc",
     "start": "node dist/src/server.js",
     "start:dev": "nodemon src/server.ts",
-    "test:integration": "jest --testMatch='**/integration/**/*.test.ts'",
+    "test:integration": "jest --testMatch='**/integration/**/*.test.ts' --detectOpenHandles --watchAll --no-cache",
     "test:unit": "jest --testMatch='**/unit/**/*.test.ts'",
+    "test:watch": "jest --testMatch='/*.test.ts' --detectOpenHandles --watchAll --no-cache",
     "test": "test:unit && test:integration",
     "lint": "prettier **/*.ts --check && eslint **/*.ts",
     "lint:fix": "prettier . --write && eslint . --fix"
@@ -17,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/Philip-Walsh/weather.git"
   },
-  "author": "",
+  "author": "Philip Walsh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Philip-Walsh/weather/issues"
