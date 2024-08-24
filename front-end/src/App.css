@@ -203,6 +203,7 @@ span {
   gap: 1em;
   padding: 1em;
 }
+
 #forecast-list ul li {
   width:20em;
   scroll-snap-align: center;

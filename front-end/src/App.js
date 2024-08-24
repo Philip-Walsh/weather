@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import WeatherCurrent from './components/WeatherCurrent';
 import ireland from './ireland.svg';
 import WeatherForecast from './components/WeatherForecast';
+import WeatherHourly from './components/WeatherHourly';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       </header>
       <main>
         <WeatherCurrent weather={weather} />
+        <WeatherHourly weather={weather} />
         <WeatherForecast weather={weather} />
         {/* <img src={ireland} className="map" alt="ireland" /> */}
       </main>
