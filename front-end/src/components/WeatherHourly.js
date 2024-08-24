@@ -8,50 +8,26 @@ function WeatherHourly({ weather }) {
     }
 //  TODO: fix filtering
     const localTime = moment.utc(weather.location.localtime);
-    // const localTime = moment(weather.location.localtime, "YYYY-MM-DD HH:mm"); // Parsing the local time format
-    // const localTime = new Date(weather.location.localtime);
+
+    let twelveHours = weather.forecast.forecastday[0].hour
+    .filter(hour => {
+        const hourTime = moment.utc(hour.time, "YYYY-MM-DD HH:mm");
+        return hourTime.isSameOrAfter(localTime);  // Fix: Used isSameOrAfter instead of !isBefore
+    });
+
+    if (twelveHours.length < 12) {
+        twelveHours = twelveHours.concat(weather.forecast.forecastday[1].hour.slice(0, 12 - twelveHours.length));
+    }
     return (
         <article id="weather-hourly">
             <section id="forecast-list">
                 <h1>Hourly Forecast</h1>
                 <ul>
-                    {weather.forecast.forecastday[0].hour
-                    .filter(hour => {
-                         // Parsing hour time in UTC
-                         const hourTime = moment.utc(hour.time, "YYYY-MM-DD HH:mm");
-                        
-                         // Debugging output
-                         console.log(`Local Time (UTC): ${localTime.format()}`);
-                         console.log(`Hour Time (UTC): ${hourTime.format()}`);
-                         
-                         // Return true if hourTime is after or the same as localTime
-                         return hourTime.isSameOrBefore(localTime);
-                        // // Parsing hour time
-                        // const hourTime = moment(hour.time, "YYYY-MM-DD HH:mm", true);
-                        
-                        // // Debugging output
-                        // console.log(`Local Time: ${localTime.format()}`);
-                        // console.log(`Hour Time: ${hourTime.format()}`);
-                        
-                        // // Ensure times are in the same time zone
-                        // console.log(`Hour Time (UTC): ${hourTime.utc().format()}`);
-                        // console.log(`Local Time (UTC): ${localTime.utc().format()}`);
-                        
-                        // // Return true if hourTime is after or the same as localTime
-                        // return hourTime.isSameOrAfter(localTime);
-                        // const hourTime = moment(hour.time, "YYYY-MM-DD HH:mm");
-                        // // return hourTime.isSameOrAfter(localTime);
-                        // // return hourTime.isBefore(localTime);
-                        // return hourTime.isAfter(localTime);
-                        // return hourTime;
-                        // // const hourTime = new Date(hour.time.replace(' ', 'T')); // Convert hour.time to Date object
-                        // // console.log(`${hourTime} >= ${localTime} is ${hourTime >= localTime} `)
-                        // // return hourTime <= localTime;
-                    })
+                    {twelveHours
                     .map(hour => (
                         <li key={hour.time_epoch}>
                             <section id="conditions">
-                                <h2>{moment(hour.time).format('hh:mm A')}</h2>
+                                <h2>{moment(hour.time).format(' hh A')}</h2>
                                 <span
                                     className="emoji"
                                     role="img"
