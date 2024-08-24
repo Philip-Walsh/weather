@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { HttpRequest, HttpMethod, HttpSuccessStatus } from './http.types';
+import { HttpRequest, HttpMethod, HttpSuccessStatus } from './http.type';
 
 
 export function expressCallback(controller: any) {

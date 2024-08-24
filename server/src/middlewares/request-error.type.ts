@@ -1,9 +1,9 @@
-export default interface ErrorResponse {
+interface ErrorResponse {
   message: string;
   stack?: string;
 }
 
-export class RequestError extends Error {
+class RequestError extends Error {
   status: number;
 
   name: string;
@@ -15,10 +15,16 @@ export class RequestError extends Error {
   }
 }
 
-export class NotFoundError extends RequestError {
+class NotFoundError extends RequestError {
   constructor(message?: string) {
     const statusCode: number = 404;
     const defaultMessage: string = 'Object Not Found';
     super(message || defaultMessage, statusCode);
   }
+}
+
+export {
+  ErrorResponse,
+  RequestError,
+  NotFoundError,
 }

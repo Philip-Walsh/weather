@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { RequestError } from './request-error.type';
+
 export default interface RequestValidators {
   params?: any;
   body?: any;
