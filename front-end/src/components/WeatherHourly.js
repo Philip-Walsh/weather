@@ -1,5 +1,5 @@
 import React from 'react';
-import conditions from '../conditions';
+import { conditions } from '../conditions';
 import moment from 'moment';
 
 function WeatherHourly({ weather }) {
@@ -20,13 +20,11 @@ function WeatherHourly({ weather }) {
     }
     return (
         <article id="weather-hourly">
-            <section id="forecast-list">
                 <h1>Hourly Forecast</h1>
                 <ul>
                     {twelveHours
                     .map(hour => (
                         <li key={hour.time_epoch}>
-                            <section id="conditions">
                                 <h2>{moment(hour.time).format(' hh A')}</h2>
                                 <span
                                     className="emoji"
@@ -36,15 +34,11 @@ function WeatherHourly({ weather }) {
                                     {conditions[hour.condition.text.toLowerCase()] ?? '❓'}
                                 </span>
                                 <p>{hour.condition.text}</p>
-                            </section>
-                            <section id="weather">
                                 <p>Temperature: {hour.temp_c}°C</p>
                                 <p>Humidity: {hour.humidity}%</p>
-                            </section>
                         </li>
                     ))}
                 </ul>
-            </section>
         </article>
     );
 }

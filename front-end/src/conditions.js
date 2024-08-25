@@ -73,4 +73,16 @@ const hourColors = [
     "#2C0E4D", // 10 PM - Night
     "#191970"  // 11 PM - Midnight
 ];
-export default conditions;
+const moonPhases =  {
+
+    'New': '🌑',
+    'Waxing Crescent': '🌒',
+    'First Quarter': '🌓',
+    'Waxing Gibbous': '🌔',
+    'Full': '🌕',
+    'Waning Gibbous': '🌖',
+    'Last Quarter': '🌗',
+    'Waning Crescent': '🌘'
+}
+
+export { conditions,  moonPhases };

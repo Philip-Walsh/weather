@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import conditions from '../conditions';
+import { conditions } from '../conditions';
 
 import moment from 'moment';
 

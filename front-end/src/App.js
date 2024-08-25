@@ -22,6 +22,7 @@ function App() {
     <>
       <header>
         <img src={logo} className="App-logo" alt="logo" />
+        <h1> Weather</h1>
       </header>
       <main>
         <WeatherCurrent weather={weather} />

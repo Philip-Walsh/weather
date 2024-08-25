@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import conditions from '../conditions';
+import React from 'react';
+import { conditions, moonPhases } from '../conditions';
 
 import moment from 'moment';
 
@@ -39,6 +39,15 @@ function WeatherForecast({ weather }) {
                             <section id="weather">
                                 <p>Temperature: {day.day.avgtemp_c}°C</p>
                                 <p>Humidity: {day.day.avghumidity}%</p>
+                                <span
+                                    className="emoji"
+                                    role="img"
+                                    aria-label={day.astro.moon_phase}
+                                >
+                                    {moonPhases[day.astro.moon_phase] ?? '❓'}
+
+                                    <p>{day.astro.moon_phase}</p>
+                                </span>
                             </section>
                         </li>
                     ))}
