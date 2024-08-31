@@ -157,7 +157,8 @@ span {
   grid-template-areas: 'location location'
     'conditions other';
   grid-template-columns: 1fr 1fr;
-  background: rgb(var(--bg-primary));
+  /* background: rgb(var(--bg-primary)); */
+  /* background: var(--bg-color); */
 }
 
 /* main * {

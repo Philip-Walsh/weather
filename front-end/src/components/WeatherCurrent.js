@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { conditions } from '../conditions';
+import { conditions, getBackgroundColor } from '../conditions';
 
 import moment from 'moment';
 
 
 function formatDate(date) {
-    // DATE is from last update time needs to be actual time maybe use tz_id
     const formattedDate = moment(date).format('ddd MMM Do HH:mm');
     return formattedDate;
 }
-
-
-
 
 function WeatherCurrent({ weather }) {
     if (!weather) {
@@ -20,11 +16,18 @@ function WeatherCurrent({ weather }) {
     const { current, location } = weather;
 
     const currentConditionTxt = conditions[current.condition.text.toLowerCase()] ?? '❓';
+    const dateTime = moment(location.localtime);
+    const currentBackgroundColor = getBackgroundColor(dateTime, false);
+
+    const weatherCurrentStyle = {
+        backgroundColor: currentBackgroundColor
+    };
 
     return (
-        <article id="weather-current">
+        <article id="weather-current" style={weatherCurrentStyle}>
+            {currentBackgroundColor}
             <section id="location">
-                <h1>{location.name} {formatDate(location.localtime)}</h1>
+                <h1>{location.name} {formatDate(dateTime)}</h1>
             </section>
             <section id="conditions">
                 <span
@@ -42,6 +45,7 @@ function WeatherCurrent({ weather }) {
         </article>
     );
 }
+
 
 export default WeatherCurrent;
 

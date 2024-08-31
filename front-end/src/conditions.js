@@ -73,9 +73,29 @@ const hourColors = [
     "#2C0E4D", // 10 PM - Night
     "#191970"  // 11 PM - Midnight
 ];
+function getBackgroundColor(time, isOvercast) {
+    const hour = time.hour();
+    let color = hourColors[hour];
+
+    // Adjust color for overcast conditions 🌥️
+    if (isOvercast) {
+        const overcastFactor = 0.8;
+        color = adjustBrightness(color, overcastFactor);
+    }
+
+    return color;
+}
+
+function adjustBrightness(color, factor) {
+    const r = Math.round(parseInt(color.slice(1, 3), 16) * factor);
+    const g = Math.round(parseInt(color.slice(3, 5), 16) * factor);
+    const b = Math.round(parseInt(color.slice(5, 7), 16) * factor);
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+}
+
 const moonPhases =  {
 
-    'New': '🌑',
+    'New Moon': '🌑',
     'Waxing Crescent': '🌒',
     'First Quarter': '🌓',
     'Waxing Gibbous': '🌔',
@@ -85,4 +105,7 @@ const moonPhases =  {
     'Waning Crescent': '🌘'
 }
 
-export { conditions,  moonPhases };
+
+
+
+export { conditions,  moonPhases, getBackgroundColor };
