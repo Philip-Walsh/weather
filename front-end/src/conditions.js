@@ -47,40 +47,41 @@ const conditions = {
     'patchy light snow with thunder': '⛈️',
     'moderate or heavy snow with thunder': '⛈️',
 }
-const hourColors = [
-    "#0B3D91", // 0 AM - Deep Night
-    "#102E7A", // 1 AM - Deep Night
-    "#152165", // 2 AM - Deep Night
-    "#1B1450", // 3 AM - Late Night
-    "#210E3B", // 4 AM - Late Night
-    "#360E3D", // 5 AM - Pre-Dawn
-    "#65498C", // 6 AM - Sunrise Glow
-    "#FFA07A", // 7 AM - Sunrise
-    "#FFD700", // 8 AM - Morning
-    "#FFF8DC", // 9 AM - Morning Light
-    "#FFFFE0", // 10 AM - Daylight
-    "#FFFF99", // 11 AM - Late Morning
-    "#FFFF66", // 12 PM - Noon
-    "#FFFF33", // 1 PM - Afternoon
-    "#FFE066", // 2 PM - Early Afternoon
-    "#FFCC66", // 3 PM - Late Afternoon
-    "#FFB347", // 4 PM - Golden Hour
-    "#FF8C00", // 5 PM - Pre-Sunset
-    "#FF4500", // 6 PM - Sunset
-    "#FF6347", // 7 PM - Post-Sunset
-    "#8B0000", // 8 PM - Dusk
-    "#4B0082", // 9 PM - Twilight
-    "#2C0E4D", // 10 PM - Night
-    "#191970"  // 11 PM - Midnight
-];
-function getBackgroundColor(time, isOvercast) {
-    const hour = time.hour();
-    let color = hourColors[hour];
 
-    // Adjust color for overcast conditions 🌥️
-    if (isOvercast) {
-        const overcastFactor = 0.8;
-        color = adjustBrightness(color, overcastFactor);
+
+const hourColors = {
+    night: "#0B3D91",
+    twilight: "#4B0082",
+    sunriseGlow: "#65498C",
+    sunrise: "#FFA07A",
+    day: "#00BFFF",
+    sunset: "#FF4500",
+    dusk: "#8B0000",
+    midnight: "#191970"
+};
+
+function getBackgroundColor(currentTime, sunriseTime, sunsetTime, cloudCover) {
+    const getTimePeriod = () => {
+        const sunriseStart = sunriseTime.clone().subtract(30, 'minutes');
+        const sunriseEnd = sunriseTime.clone().add(30, 'minutes');
+        const sunsetStart = sunsetTime.clone().subtract(30, 'minutes');
+        const sunsetEnd = sunsetTime.clone().add(30, 'minutes');
+
+        if (currentTime.isBefore(sunriseStart)) return 'night';
+        if (currentTime.isBetween(sunriseStart, sunriseTime)) return 'twilight';
+        if (currentTime.isBetween(sunriseTime, sunriseEnd)) return 'sunriseGlow';
+        if (currentTime.isBetween(sunriseEnd, sunsetStart)) return 'day';
+        if (currentTime.isBetween(sunsetStart, sunsetTime)) return 'sunset';
+        if (currentTime.isBetween(sunsetTime, sunsetEnd)) return 'dusk';
+        return 'midnight';
+    };
+
+    const timePeriod = getTimePeriod();
+    let color = hourColors[timePeriod];
+
+    if (cloudCover) {
+        const cloudFactor = 1 - (cloudCover / 100);
+        color = adjustBrightness(color, cloudFactor);
     }
 
     return color;
@@ -92,6 +93,7 @@ function adjustBrightness(color, factor) {
     const b = Math.round(parseInt(color.slice(5, 7), 16) * factor);
     return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
 }
+
 
 const moonPhases =  {
 

@@ -14,13 +14,16 @@ function WeatherCurrent({ weather }) {
         return <div>Loading...</div>;
     }
     const { current, location } = weather;
+    const astro = weather.forecast.forecastday[0].astro;
 
     const currentConditionTxt = conditions[current.condition.text.toLowerCase()] ?? '❓';
     const dateTime = moment(location.localtime);
-    const currentBackgroundColor = getBackgroundColor(dateTime, false);
+    const { sunrise, sunset } = astro;
+    const currentBackgroundColor = getBackgroundColor(dateTime, moment(sunrise), moment(sunset), weather.current.cloud);
 
     const weatherCurrentStyle = {
-        backgroundColor: currentBackgroundColor
+        backgroundColor: currentBackgroundColor,
+        color: `rgb(${255-parseInt(currentBackgroundColor.slice(1,3),16)}, ${255-parseInt(currentBackgroundColor.slice(3,5),16)}, ${255-parseInt(currentBackgroundColor.slice(5,7),16)})`
     };
 
     return (
