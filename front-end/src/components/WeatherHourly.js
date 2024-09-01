@@ -1,5 +1,5 @@
 import React from 'react';
-import { conditions } from '../conditions';
+import { conditions, getBackgroundColor } from '../conditions';
 import moment from 'moment';
 
 function WeatherHourly({ weather }) {
@@ -24,7 +24,13 @@ function WeatherHourly({ weather }) {
                 <ul>
                     {twelveHours
                     .map(hour => (
-                        <li key={hour.time_epoch}>
+                        <li key={hour.time_epoch}
+                         style={
+                            {
+                            // fix style always current or always midnight?
+                            backgroundColor: getBackgroundColor(moment(hour.time), moment(weather.forecast.forecastday[0].astro.sunrise), moment(weather.forecast.forecastday[0].astro.sunset), 0),
+                            }
+                         }>
                                 <h2>{moment(hour.time).format(' hh A')}</h2>
                                 <span
                                     className="emoji"

@@ -83,6 +83,7 @@ function getBackgroundColor(currentTime, sunriseTime, sunsetTime, cloudCover) {
         const cloudFactor = parseInt(1 - (cloudCover / 100));
         //TODO: Fix making overcast
         color = ColorUtils.addWhite(color, cloudFactor);
+        // color = ColorUtils.adjustBrightness(color, cloudFactor);
     }
 
     return color;
