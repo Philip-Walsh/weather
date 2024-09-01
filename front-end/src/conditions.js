@@ -80,22 +80,50 @@ function getBackgroundColor(currentTime, sunriseTime, sunsetTime, cloudCover) {
     let color = hourColors[timePeriod];
 
     if (cloudCover) {
-        const cloudFactor = 1 - (cloudCover / 100);
-        color = adjustBrightness(color, cloudFactor);
+        const cloudFactor = parseInt(1 - (cloudCover / 100));
+        //TODO: Fix making overcast
+        color = ColorUtils.addWhite(color, cloudFactor);
     }
 
     return color;
 }
 
-function adjustBrightness(color, factor) {
-    const r = Math.round(parseInt(color.slice(1, 3), 16) * factor);
-    const g = Math.round(parseInt(color.slice(3, 5), 16) * factor);
-    const b = Math.round(parseInt(color.slice(5, 7), 16) * factor);
-    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
-}
+const ColorUtils = {
+    componentToHex(c) {
+        const hex = c.toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+    },
 
+    rgbToHex(r, g, b) {
+        return `#${this.componentToHex(r)}${this.componentToHex(g)}${this.componentToHex(b)}`;
+    },
 
-const moonPhases =  {
+    hexToRgb(hex) {
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return { r, g, b };
+    },
+
+    adjustBrightness(color, factor) {
+        const { r, g, b } = this.hexToRgb(color);
+        const newR = Math.round(r * factor);
+        const newG = Math.round(g * factor);
+        const newB = Math.round(b * factor);
+        return this.rgbToHex(newR, newG, newB).toUpperCase();
+    },
+
+    addWhite(color, amount) {
+        const { r, g, b } = this.hexToRgb(color);
+        const newR = Math.min(255, Math.round(r + (255 - r) * amount));
+        const newG = Math.min(255, Math.round(g + (255 - g) * amount));
+        const newB = Math.min(255, Math.round(b + (255 - b) * amount));
+        return this.rgbToHex(newR, newG, newB).toUpperCase();
+    }
+};
+
+const moonPhases = {
 
     'New Moon': '🌑',
     'Waxing Crescent': '🌒',
@@ -110,4 +138,4 @@ const moonPhases =  {
 
 
 
-export { conditions,  moonPhases, getBackgroundColor };
+export { conditions, moonPhases, getBackgroundColor };
