@@ -28,7 +28,7 @@ function WeatherHourly({ weather }) {
                          style={
                             {
                             // fix style always current or always midnight?
-                            backgroundColor: getBackgroundColor(moment(hour.time), moment(weather.forecast.forecastday[0].astro.sunrise), moment(weather.forecast.forecastday[0].astro.sunset), 0),
+                            backgroundColor: getBackgroundColor(moment(hour.time), moment(weather.forecast.forecastday[0].astro.sunrise, 'hh:mm A'), moment(weather.forecast.forecastday[0].astro.sunset, 'hh:mm A'), 0),
                             }
                          }>
                                 <h2>{moment(hour.time).format(' hh A')}</h2>
@@ -37,7 +37,7 @@ function WeatherHourly({ weather }) {
                                     role="img"
                                     aria-label={hour.condition.text}
                                 >
-                                    {conditions[hour.condition.text.toLowerCase()] ?? '❓'}
+                                    {conditions[hour.condition.text.trim().toLowerCase()] ?? '❓'}
                                 </span>
                                 <p>{hour.condition.text}</p>
                                 <p>Temperature: {hour.temp_c}°C</p>

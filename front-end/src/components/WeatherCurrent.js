@@ -16,10 +16,10 @@ function WeatherCurrent({ weather }) {
     const { current, location } = weather;
     const astro = weather.forecast.forecastday[0].astro;
 
-    const currentConditionTxt = conditions[current.condition.text.toLowerCase()] ?? '❓';
+    const currentConditionTxt = conditions[current.condition.text.trim().toLowerCase()] ?? '❓';
     const dateTime = moment(location.localtime);
     const { sunrise, sunset } = astro;
-    const currentBackgroundColor = getBackgroundColor(dateTime, moment(sunrise), moment(sunset), weather.current.cloud);
+    const currentBackgroundColor = getBackgroundColor(dateTime, moment(sunrise, 'hh:mm A'), moment(sunset, 'hh:mm A'), weather.current.cloud);
 
     const weatherCurrentStyle = {
         backgroundColor: currentBackgroundColor,

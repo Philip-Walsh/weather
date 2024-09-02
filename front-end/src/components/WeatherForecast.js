@@ -32,7 +32,7 @@ function WeatherForecast({ weather }) {
                                     role="img"
                                     aria-label={day.day.condition.text}
                                 >
-                                    {conditions[day.day.condition.text.toLowerCase()] ?? '❓'}
+                                    {conditions[day.day.condition.text.trim().toLowerCase()] ?? '❓'}
                                 </span>
                                 <p>{day.day.condition.text}</p>
                             </section>

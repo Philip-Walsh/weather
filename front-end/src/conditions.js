@@ -3,6 +3,7 @@ const conditions = {
     'partly cloudy': '🌤️',
     'cloudy': '☁️',
     'overcast': '🌥️',
+    'clear': '⭐',
     'mist': '🌫️',
     'patchy rain possible': '🌦️',
     'patchy rain nearby': '🌧️',
@@ -61,30 +62,59 @@ const hourColors = {
 };
 
 function getBackgroundColor(currentTime, sunriseTime, sunsetTime, cloudCover) {
+    console.log("currentTime:", currentTime.format());
+    console.log("sunriseTime:", sunriseTime.format());
+    console.log("sunsetTime:", sunsetTime.format());
+    console.log("cloudCover:", cloudCover);
+
     const getTimePeriod = () => {
         const sunriseStart = sunriseTime.clone().subtract(30, 'minutes');
         const sunriseEnd = sunriseTime.clone().add(30, 'minutes');
         const sunsetStart = sunsetTime.clone().subtract(30, 'minutes');
         const sunsetEnd = sunsetTime.clone().add(30, 'minutes');
 
-        if (currentTime.isBefore(sunriseStart)) return 'night';
-        if (currentTime.isBetween(sunriseStart, sunriseTime)) return 'twilight';
-        if (currentTime.isBetween(sunriseTime, sunriseEnd)) return 'sunriseGlow';
-        if (currentTime.isBetween(sunriseEnd, sunsetStart)) return 'day';
-        if (currentTime.isBetween(sunsetStart, sunsetTime)) return 'sunset';
-        if (currentTime.isBetween(sunsetTime, sunsetEnd)) return 'dusk';
+        if (currentTime.isBefore(sunriseStart)) {
+            console.log("before sunrise");
+            return 'night';
+        }
+        if (currentTime.isBetween(sunriseStart, sunriseTime)) {
+            console.log("between sunrise start and sunrise");
+            return 'twilight';
+        }
+        if (currentTime.isBetween(sunriseTime, sunriseEnd)) {
+            console.log("between sunrise and sunrise end");
+            return 'sunriseGlow';
+        }
+        if (currentTime.isBetween(sunriseEnd, sunsetStart)) {
+            console.log("between sunrise end and sunset start");
+            return 'day';
+        }
+        if (currentTime.isBetween(sunsetStart, sunsetTime)) {
+            console.log("between sunset start and sunset");
+            return 'sunset';
+        }
+        if (currentTime.isBetween(sunsetTime, sunsetEnd)) {
+            console.log("between sunset and sunset end");
+            return 'dusk';
+        }
+        console.log("after sunset");
         return 'midnight';
     };
 
     const timePeriod = getTimePeriod();
+    console.log("timePeriod:", timePeriod);
+
     let color = hourColors[timePeriod];
 
     if (cloudCover) {
+        console.log("cloudCover:", cloudCover);
         const cloudFactor = parseInt(1 - (cloudCover / 100));
         //TODO: Fix making overcast
         color = ColorUtils.addWhite(color, cloudFactor);
         // color = ColorUtils.adjustBrightness(color, cloudFactor);
     }
+
+    console.log("color:", color);
 
     return color;
 }
