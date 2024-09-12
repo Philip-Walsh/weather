@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Color+Emoji&family=Oswald:wght@200..700&display=swap');
+
+:root {
+  --text-color-primary: #000;
+  --text-brand-color: #F6F1F1;
+  --elem-height: 3em;
+
+  /* 
+  #3795BD
+  #4E31AA
+  #3A1078
+  #F7F7F8
+  */
+  /*  60-30-10 Rule */
+  --bg-primary: 55, 149, 189;
+  --bg-secondary: 78, 49, 170;
+  --bg-accent: 58, 16, 120;
+  --bg-highlight: #F7F7F8;
+}
+
+.emoji {
+  font-family: "Noto Color Emoji", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  max-width: 80vw;
+  overflow-x: auto;
+}
+
+html {
+  font-size: 16px;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--text-color-primary);
+
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'main main'
+    'footer footer';
+  background: rgb(var(--bg-primary));
+  font-family: "JetBrains Mono", monospace;
+
+}
+
+main a {
+  color: var(--bg-highlight) !important;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+main > * {
+border-radius: 2em;
+border: 2px solid var(--bg-highlight);
+}
+header {
+  grid-area: header;
+  max-height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+article h1{
+  padding-left: 10em;
+}
+header img {
+  max-height: 2em;
+}
+
+footer {
+  grid-area: footer;
+  padding: 2em 0;
+
+}
+
+nav {
+  grid-area: nav;
+}
+
+header,
+footer,
+nav {
+  background-color: rgb(var(--bg-primary));
+  color: var(--text-brand-color);
+  min-height: var(--elem-height);
+}
+
+
+main {
+  grid-area: main;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+  animation: gradient 3s ease infinite;
+  background: rgb(var(--bg-secondary));
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+button {
+  background-color: var(--bg-highlight);
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.2em;
+  box-shadow: inset 2px 2px 2px 1px #0000008f, inset -2px -2px 2px 1px #ffffff2e;
+}
+
+button:hover {
+  filter: drop-shadow(16px 16px 20px var(--bg-highlight)) brightness(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
+span {
+  color: var(--bg-highlight)
+}
+
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: rgb(var(--bg-primary));
+  color: var(--bg-highlight);
+  opacity: 0;
+}
+
+.skip-to-main:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+}
+
+#weather-current {
+  grid-area: current;
+  display: grid;
+  grid-template-areas: 'location location'
+    'conditions other';
+  grid-template-columns: 1fr 1fr;
+  /* background: rgb(var(--bg-primary)); */
+  /* background: var(--bg-color); */
+}
+
+/* main * {
+  border: 2px solid var(--bg-highlight);
+} */
+
+#location {
+  grid-area: location;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
+#weather {
+  grid-area: other;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+#conditions {
+  /* grid-area: conditions; */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#conditions .emoji {
+  font-size: 10em;
+}
+
+.map {
+  grid-area: map;
+  max-height: 30em;
+}
+
+#weather-current {
+  min-width: 60em;
+  max-width: 60em;
+}
+
+ul {
+  min-width: 60em;
+  max-width: 60em;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  list-style-type: none;
+  display: flex;gap: 1em;
+  padding: 1em;
+}
+
+#forecast-list ul li {
+  width:20em;
+  scroll-snap-align: center;
+}
+/* Hacky exclude same day */
+#forecast-list:nth-of-type(2) ul li:first-of-type {
+  display: none;
+}
+/* #forecast-list:nth-of-type(1) ul li #conditions span {
+  font-size: 5em;
+}
+#forecast-list:nth-of-type(1) ul li {
+  min-width: 9em;
+  max-width: 9em;
+} */
+
+#weather-hourly ul {
+  display: flex;
+  list-style-type: none;
+
+}
+
+#weather-hourly ul li{
+  min-width: 10em;
+}

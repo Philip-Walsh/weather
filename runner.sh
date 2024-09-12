@@ -12,7 +12,7 @@ function run_server() {
 
 function run_ui() {
     echo "Starting UI 👁‍🗨"
-    cd "${WORKDIR}/front-end"
+    cd "${WORKDIR}/front-end-js"
     npm install
     npm run start
 }

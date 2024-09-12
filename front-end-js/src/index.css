@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  
+}
+* {
+  max-width: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  font-size: 14px;
+  color: #61dafb;
+  font-weight: bold;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  overflow: visible;
+}
